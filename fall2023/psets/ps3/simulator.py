@@ -44,33 +44,41 @@ def executeProgram(programArr, inputArr):
             memory[variableList[ops[0]]] = variableList[ops[1]]
         if cmd == "assign":
             # ['assign', i, j]: assign var_i to the value j
-            # TODO: Implement assign.
+            variableList[ops[0]] = ops[1]
             pass
             
         # Arithmetic commands
         if cmd == "+":
             # ['+', i, j, k]: compute (var_j + var_k) and store in var_i
-            # TODO: Implement addition.
+            variableList[ops[0]] = variableList[ops[1]] + variableList[ops[2]]
             pass
         if cmd == "-":
             # ['-', i, j, k]: compute max((var_j - var_k), 0) and store in var_i.
-            # TODO: Implement subtraction.
+            # can i use max function
+            variableList[ops[0]] = max(variableList[ops[1]] - variableList[ops[2]], 0)
             pass
         if cmd == "*":
             # ['*', i, j, k]: compute (var_j * var_k) and store in var_i.
-            # TODO: Implement multiplication.
+            variableList[ops[0]] = variableList[ops[1]] * variableList[ops[2]]
             pass
         if cmd == "/":
             #  ['/', i, j, k]: compute (var_j // var_k) and store in var_i.
             # Note that this is integer division. You should return an integer, not a float.
             # Remember division by 0 results in 0.
-            # TODO: Implement division.
+            # double check
+            if variableList[ops[2]] == 0:
+                div = 0
+            else: 
+                div = int(variableList[ops[1]] // variableList[ops[2]])
+            variableList[ops[0]] = div
+
             pass
             
         # Control commands
         if cmd == "goto":
             # ['goto', i, j]: if var_i is equal to 0, go to line j
-            # TODO: Implement goto.
+            if variableList[ops[0]] == 0:
+                programCounter = ops[1] - 1
             pass
         
         programCounter += 1
